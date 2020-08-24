@@ -100,27 +100,42 @@ function List(props) {
     }
    
     setErrors(errorsData);
-    setFinishFormValue(values); 
+
+    if (!errorsData) {
+      setFinishFormValue(values);
+    }
   }
   
 
   return (
-    <div className="list container mx-5 my-3">
-      <p className="title">Form result</p>
-      <div>Email: {finishFormValue.email}</div>
-      <div>Password: {finishFormValue.password}</div>
-      <div>Address: {finishFormValue.address}</div>
-      <div>Phone number: {finishFormValue.phone}</div>
-      <div>Type: {finishFormValue.type}</div>
-      <div>Gender: {finishFormValue.gender}</div>
-      <div>Approve: {finishFormValue.approve}</div>
-      <p className="title">Sign Up</p>
-      <div className="text-danger">{}</div>
-      <div>
-        <SignUp 
-          checkValidate={checkValidate} 
-          errors={errors}
-        />
+    // <div className="list container mx-5 my-3">
+    //   <p className="title">Form result</p>
+    //   <div>Email: {finishFormValue.email}</div>
+    //   <div>Password: {finishFormValue.password}</div>
+    //   <div>Address: {finishFormValue.address}</div>
+    //   <div>Phone number: {finishFormValue.phone}</div>
+    //   <div>Type: {finishFormValue.type}</div>
+    //   <div>Gender: {finishFormValue.gender}</div>
+    //   <div>Approve: {finishFormValue.approve}</div>
+    //   <p className="title">Sign Up</p>
+    //   <div className="text-danger">{}</div>
+    //   <div>
+    //     <SignUp 
+    //       checkValidate={checkValidate} 
+    //       errors={errors}
+    //     />
+    //   </div>
+    // </div>
+
+    <div className="list container m-5">
+      <div className="row">
+
+        <div className="col-md-6 img">
+        </div>
+        <div className="col-md-6 px-5">
+          <p className="title">Register form</p>
+          <div><SignUp /></div>
+        </div>
       </div>
     </div>
   );
