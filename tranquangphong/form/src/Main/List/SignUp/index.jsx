@@ -3,42 +3,18 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';;
 // import './styles.css';
 
-function SignUp(props) {
-  const [ formValue, setFormValue ] = useState({
-    email: '',
-    password: '',
-    address: '',
-    phone: '',
-    type: '',
-    radio: '',
-    multiCheckbox: [],
-    agree: []
-  });
-
-  const { checkValidate, errors } = props;
-
-  const handleChangeValue = (e) => {
-    const { name, value, checked } = e.target;
-    let newValue = '';
-
-    if (name === 'approve') {
-      if (checked) {
-        newValue = [
-          ...formValue.approve,
-          value
-        ];
-      } else if (formValue.approve.indexOf(value) !== -1) {
-        const approveArray = formValue.approve;
-        approveArray.splice(formValue.approve.indexOf(value), 1)
-        newValue = [...approveArray]
-      }
-    } else {
-      newValue = value;
-    }
-    setFormValue({
-      ...formValue,
-      [name]: newValue
-    });
+function SignUp() {
+  const renderCustomInput = (props) => {
+    const { field, meta } = props;
+    return (
+      <>
+        <input 
+          { ...field } 
+          className={`form-control ${meta.touched && meta.error ? 'border-danger' : ''}`} 
+        />
+        {meta.touched && meta.error && <div className='text-danger'>{meta.error}</div>}
+      </>
+    )
   }
 
   return (
@@ -47,6 +23,7 @@ function SignUp(props) {
         fullName: '',
         email: '',
         password: '',
+        confirmPassword: '',
         address: '',
         phone: '',
         course: '',
@@ -56,38 +33,45 @@ function SignUp(props) {
       }}
       validationSchema={Yup.object({
         fullName: Yup.string()
-          .required('Bạn chưa nhập tên'),
+          .required('Please enter your full name'),
         email: Yup.string()
-          .required('Bạn chưa nhập email')
-          .email('Định dạng email chưa đúng'),
+          .required('Please enter your email')
+          .email('Incorrect email format'),
         password: Yup.string()
-          .required('Bạn chưa nhập password')
-          .min(8, 'Mật khẩu phải dài hơn 8 ký tự'),
+          .required('Please enter your password')
+          .min(8, 'Password must be longer than 8 characters'),
+        confirmPassword: Yup.string()
+          .required('Please enter confirm password')
+          .oneOf([Yup.ref('password')], 'Incorrect confirm password'),
         address: Yup.string()
-          .required('Bạn chưa nhập địa chỉ')
-          .max(30, 'Địa chỉ dài tối đa 30 ký tự'),
+          .required('Please enter your address')
+          .max(30, 'Must be 30 characters or less'),
         phone: Yup.string()
-          .required('Bạn chưa nhập số điện thoại')
-          .matches(/(03|07|08|09|01[2|6|8|9])+([0-9]{8})\b/, 'Định dạng số điện thoại chưa đúng'),
+          .required('Please enter your phone number')
+          .matches(/(03|07|08|09|01[2|6|8|9])+([0-9]{8})\b/, 'Incorrect phone number format'),
         course: Yup.string()
-          .required('Bạn chưa chọn khóa học'),
+          .required('Please choose your course'),
+        hobbies: Yup.array()
+          .min(1, 'You must choose at least one hobby'),
         agree: Yup.array()
-          .required('Bạn phải check vào ô đồng ý các điều khoản'),
+          .required('You must agree with terms and conditions'),
         })}
       onSubmit={(values) => console.log(values)}
     >
       <Form>
         <div className="form-group">
-          <label htmlFor="inputAddress">Full Name</label>
+          <label htmlFor="fullName">Full name</label>
           <Field 
-            type="text" 
-            className="form-control" 
-            id="inputAddress" 
             name="fullName"
-          />
-          <div className="text-danger">
-            <ErrorMessage name="fullName" />
-          </div>
+            render={(props) => renderCustomInput({
+              ...props, 
+              field: {
+                ...props.field,
+                type: 'text', 
+                placeholder: 'Enter your full name'
+              }
+            })} 
+          />  
         </div>
 
         <div>
@@ -97,7 +81,7 @@ function SignUp(props) {
               className="form-check-input"
               type="radio" 
               name="gender" 
-              id="exampleRadios1" 
+              id="male" 
               value="male" 
             />
             <label className="form-check-label" htmlFor="exampleRadios1">
@@ -109,7 +93,7 @@ function SignUp(props) {
               className="form-check-input" 
               type="radio" 
               name="gender" 
-              id="exampleRadios2" 
+              id="female" 
               value="female" 
             />
             <label className="form-check-label" htmlFor="exampleRadios2">
@@ -118,72 +102,103 @@ function SignUp(props) {
           </div>
         </div>
 
-        <div className="form-row">
-          <div className="form-group col-md-6">
-            <label htmlFor="inputEmail4">Email</label>
-            <Field 
-              type="email" 
-              className="form-control" 
-              id="inputEmail4"
-              name="email"
+        <div className="form-group">
+          <label htmlFor="email">Email</label>
+          <Field 
+            name="email"
+            render={(props) => renderCustomInput({
+              ...props, 
+              field: {
+                ...props.field,
+                type: 'email', 
+                placeholder: 'Enter your email'
+              }
+            })} 
             />
-            <div className="text-danger">
-              <ErrorMessage name="email" />
-            </div>
-          </div>
-          <div className="form-group col-md-6">
-            <label htmlFor="inputPassword4">Password</label>
-            <Field
-              type="password" 
-              className="form-control"
-              id="inputPassword4"
-              name="password"
-            />
-            <div className="text-danger">
-              <ErrorMessage name="password" />
-            </div>
-          </div>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
+          <Field
+            type="password" 
+            className="form-control"
+            id="password"
+            name="password"
+            render={(props) => renderCustomInput({
+              ...props, 
+              field: {
+                ...props.field, 
+                type: 'password',
+                placeholder: 'Enter your password'
+              }
+            })}     
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="confirmPassword">Confirm password</label>
+          <Field 
+            name="confirmPassword"
+            render={(props) => renderCustomInput({
+              ...props, 
+              field: {
+                ...props.field, 
+                type: 'password',
+                placeholder: 'Enter your password'
+              }
+            })}  
+          />
         </div>
 
         <div className="form-group">
           <label htmlFor="inputAddress">Address</label>
           <Field 
-            type="text" 
-            className="form-control" 
-            id="inputAddress" 
             name="address"
+            render={(props) => renderCustomInput({
+              ...props, 
+              field: {
+                ...props.field, 
+                placeholder: 'Enter your address'
+              }
+            })} 
           />
-          <div className="text-danger">
-            <ErrorMessage name="address" />
-          </div>
         </div>
 
         <div className="form-row">
           <div className="form-group col-md-6">
             <label htmlFor="inputAddress2">Phone number</label>
             <Field 
-              type="tel" 
-              className="form-control" 
-              id="inputAddress2" 
               name="phone"
+              render={(props) => renderCustomInput({
+                ...props, 
+                field: {
+                  ...props.field, 
+                  type: 'tel',
+                  placeholder: 'Enter your phone number'
+                }
+              })}  
             />
-            <div className="text-danger">
-              <ErrorMessage name="phone" />
-            </div>
           </div>
 
           <div className="form-group col-md-6">
             <label htmlFor="exampleFormControlSelect1">Course</label>
             <Field 
-              className="form-control"
-              id="exampleFormControlSelect1"
               name="course"
-              as="select"
+              render={(props) => {
+                const { field, meta } = props;
+                return (
+                  <select
+                    {...field}
+                    className={`form-control ${meta.touched && meta.error ? 'border-danger' : ''}`} 
+                  >
+                    <option value="">Select course</option>
+                    <option value="design">Design</option>
+                    <option value="photography">Photography</option>
+                    <option value="marketing">Marketing</option>
+                  </select>
+                );
+              }}
             >
-              <option value="">Select course</option>
-              <option value="design">Design</option>
-              <option value="photography">Photography</option>
-              <option value="marketing">Marketing</option>
             </Field>
             <div className="text-danger">
               <ErrorMessage name="course" />
@@ -230,7 +245,7 @@ function SignUp(props) {
             </label>
           </div>
 
-          <div class="form-group">
+          <div className="form-group">
             <div className="form-check">
               <Field 
                 className="form-check-input" 
@@ -243,7 +258,7 @@ function SignUp(props) {
               Other
               </label>
             </div>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
+            <textarea className="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
           </div>
           <div className="text-danger">
               <ErrorMessage name="hobbies" />
@@ -259,11 +274,11 @@ function SignUp(props) {
             id="exampleRadios2" 
           />
           <label className="form-check-label" htmlFor="exampleRadios2">
-            I agree to the <a href="#">Term and Conditions</a> 
+            I agree to the <a href="#">Terms and Conditions</a> 
           </label>
-          <div className="text-danger">
-              <ErrorMessage name="agree" />
-          </div>
+        </div>
+        <div className="text-danger">
+            <ErrorMessage name="agree" />
         </div>
 
         <button 
