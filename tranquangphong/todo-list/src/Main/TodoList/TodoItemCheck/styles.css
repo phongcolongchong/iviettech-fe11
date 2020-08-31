@@ -1,0 +1,28 @@
+.todo-item {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 12px;
+  margin: 12px;
+  border-radius: 20px;
+  box-shadow: 0 0 10px #DDD;
+  background-color: #FFF;
+}
+
+.icon:hover {
+  cursor: pointer;
+}
+
+.check {
+  margin-right: 8px;
+}
+
+.content-check {
+  flex-grow: 1;
+  text-decoration: line-through;
+  opacity: 0.3;
+}
+
+.edit {
+  margin-right: 8px;
+}

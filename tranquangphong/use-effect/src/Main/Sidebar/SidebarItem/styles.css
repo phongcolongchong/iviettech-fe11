@@ -1,17 +1,18 @@
 .sidebar-item {
   width: 300px;
-  border-style: hidden;
-  color: white;
+  color: #000;
   padding: 12px 28px;
 }
 
 .sidebar-item:hover {
+  color: #FFF;
   background-color: #274b69;
   cursor: pointer;
   border-right: 6px solid orange;
 }
 
 .sidebar-active {
+  color: #FFF;
   background-color: #274b69;
   border-right: 6px solid orange;
 }

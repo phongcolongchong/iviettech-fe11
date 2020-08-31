@@ -59,15 +59,17 @@ function Group(props) {
 
   return (
     <div className="col-4">
-      <div className={`item ${activeIndex === activeGroup ? "active" : ""}`}>
+      {/* <div className={`item ${activeIndex === activeGroup ? "active" : ""}`}> */}
+      <div className= {isCart ? 'item active' : 'item'}>
+      {/* <div className="item active"> */}
         <div className="d-flex my-3">
           <div className="font-weight-bold mx-3 d-flex align-items-center">{ name }</div>
           {isCart ? (
             <button 
-              className="btn btn-danger btn-sm" 
-              onClick={() => handleDeleteGroup()}>Delete
+            className="btn btn-danger btn-sm" 
+            onClick={() => handleDeleteGroup()}>Delete
             </button>) : (
-            <button 
+              <button 
               className="btn btn-success btn-sm" 
               onClick={() => handleSelectGroup()}>Select
             </button>)}

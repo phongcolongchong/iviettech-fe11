@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import Group from './Group';
+import SignUp from './SignUp';
 import Tab1 from './Tab1';
 import Tab2 from './Tab2';
-import Group from './Group';
 import './styles.css';
 
 function List(props) {
@@ -62,6 +63,53 @@ function List(props) {
   //   </div>
   // );
 
+
+  // const [ finishFormValue, setFinishFormValue ] = useState({});
+  // const [ errors, setErrors ] = useState({
+  //   email: '',
+  //   password: ''
+  // });
+
+  // const checkValidate = (values) => {
+  //   let errorsData = {};
+
+  //   if (!values.email && values.email.length === 0) {
+  //     errorsData = {
+  //       ...errorsData,
+  //       email: 'Bạn chưa nhập email'
+  //     };
+  //   } else {
+  //     errorsData = {
+  //       ...errorsData,
+  //       email: ''
+  //     };
+  //   }
+
+  //   if (!values.password && values.password.length === 0) {
+  //     errorsData = {
+  //       ...errorsData,
+  //       password: 'Bạn chưa nhập mật khẩu'
+  //     };
+  //   } else if (values.password.length < 8) {
+  //     errorsData = {
+  //       ...errorsData,
+  //       password: 'Mật khẩu phải dài hơn 8 ký tự'
+  //     };
+  //   }  else {
+  //     errorsData = {
+  //       ...errorsData,
+  //       password: ''
+  //     };
+  //   }
+   
+  //   setErrors(errorsData);
+
+  //   if (!errorsData) {
+  //     setFinishFormValue(values);
+  //   }
+  // }
+
+
   const [ countNumber, setCountNumber ] = useState(1);
   const [ isMax, setIsMax ] = useState(false);
   const [ tabActive, setTabActive ] = useState(1);
@@ -74,7 +122,41 @@ function List(props) {
     console.log('is Max: ', isMax);
   }, [isMax]);
 
+
   return (
+    // <div className="list container mx-5 my-3">
+    //   <p className="title">Form result</p>
+    //   <div>Email: {finishFormValue.email}</div>
+    //   <div>Password: {finishFormValue.password}</div>
+    //   <div>Address: {finishFormValue.address}</div>
+    //   <div>Phone number: {finishFormValue.phone}</div>
+    //   <div>Type: {finishFormValue.type}</div>
+    //   <div>Gender: {finishFormValue.gender}</div>
+    //   <div>Approve: {finishFormValue.approve}</div>
+    //   <p className="title">Sign Up</p>
+    //   <div className="text-danger">{}</div>
+    //   <div>
+    //     <SignUp 
+    //       checkValidate={checkValidate} 
+    //       errors={errors}
+    //     />
+    //   </div>
+    // </div>
+
+    // // -----Sign up with Formik-----
+    // <div className="list container m-5">
+    //   <div className="row">
+
+    //     <div className="col-md-6 img">
+    //     </div>
+    //     <div className="col-md-6 px-5">
+    //       <p className="title">Register form</p>
+    //       <div><SignUp /></div>
+    //     </div>
+    //   </div>
+    // </div>
+
+    // -----Exam useEffect-----
     <div className="m-5">
       <button 
         className="btn btn-primary"

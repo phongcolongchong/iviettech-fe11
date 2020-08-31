@@ -1,11 +1,24 @@
 .list {
   width: calc(100% - 300px);
   min-height: calc(100% - 106px);
+  box-shadow: 0 0 10px #DDD;
+  border-radius: 16px;
 }
 
 .title {
-  margin: 16px;
+  text-align: center;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 28px;
   color: #202022;
+  margin-top: 20px;
+}
+
+.img {
+  /* background-image: url(https://i.pinimg.com/564x/7a/1a/22/7a1a22917a15516673b7319fb5a294d1.jpg); */
+  /* background-image: url(https://i.pinimg.com/564x/38/c4/94/38c49428e91dbd05e0650c83edc86a04.jpg); */
+  background-image: url(https://i.pinimg.com/564x/ec/38/dc/ec38dc98a555dd13fbfec3a9c8501d5c.jpg);
+  /* background-image: url(https://i.pinimg.com/564x/88/c3/9f/88c39f309d8e18d0883f43b2ff0bfbeb.jpg); */
+  background-size: cover;
+  background-position: center;
+  border-radius: 16px 0 0 16px;
 }

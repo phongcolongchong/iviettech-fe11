@@ -1,0 +1,57 @@
+.container-todo-list {
+  width: 330px;
+  height: 600px;
+  margin: 0 auto;
+  background-color: #FFF;
+}
+
+.container-title {
+  height: 180px;
+  background-image: url('https://i.pinimg.com/564x/65/3a/71/653a717146fb47b666283dc49450cfdc.jpg');
+  /* background-image: url('https://i.pinimg.com/474x/5c/78/69/5c7869d3bf07572af856bdd030f3496b.jpg'); */
+  background-size: cover;
+  background-position: center 40%;
+}
+
+.time {
+  color: #FFF;
+}
+
+.container-todo-item {
+  height: calc(600px - 244px);
+}
+
+.add-input {
+  display: flex;
+  margin: 0 12px;
+}
+
+.input {
+  flex-grow: 1;
+  height: 40px;
+  padding: 0 12px;
+  margin-right: 5px;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 0 10px #DDD;
+  background-color: #FFF;
+  outline: none;
+}
+
+.input:focus {
+  border-bottom: 1px solid green;
+}
+
+.add-btn {
+  height: 40px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 0 10px #DDD;
+  background-color: green;
+  color: #FFF;
+}
+
+.add-btn:focus {
+  outline: none;
+}
