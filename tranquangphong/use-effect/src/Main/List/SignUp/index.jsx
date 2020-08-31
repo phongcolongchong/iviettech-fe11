@@ -1,9 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';;
 // import './styles.css';
 
-function SignUp() {
+function SignUp(props) {
+  const [initialValues, setInitialValues] = useState({
+    fullName: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    address: '',
+    phone: '',
+    course: '',
+    gender: '',
+    hobbies: [],
+    agree: []
+  })
+
+  const { setFormValue } = props;
+
+  useEffect(() => {
+    console.log('First time in Sign Up page');
+    setInitialValues({
+      fullName: '',
+      email: 'quangphong@gmail.com',
+      password: '',
+      confirmPassword: '',
+      address: '113 Tieu La',
+      phone: '0905 666 888',
+      course: '',
+      gender: '',
+      hobbies: [],
+      agree: []
+    })
+  }, []);
+
   const renderCustomInput = (props) => {
     const { field, meta } = props;
     return (
@@ -19,18 +50,7 @@ function SignUp() {
 
   return (
     <Formik
-      initialValues={{ 
-        fullName: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
-        address: '',
-        phone: '',
-        course: '',
-        gender: '',
-        hobbies: [],
-        agree: []
-      }}
+      initialValues={initialValues}
       validationSchema={Yup.object({
         fullName: Yup.string()
           .required('Please enter your full name'),
@@ -56,7 +76,11 @@ function SignUp() {
         agree: Yup.array()
           .required('You must agree with terms and conditions'),
         })}
-      onSubmit={(values) => console.log(values)}
+      onSubmit={(values) => {
+        console.log("SignUp -> values", values)
+        setFormValue(values);
+      }}
+      enableReinitialize
     >
       <Form>
         <div className="form-group">

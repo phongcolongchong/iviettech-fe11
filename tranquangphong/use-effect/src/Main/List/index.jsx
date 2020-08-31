@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Group from './Group';
 import SignUp from './SignUp';
 import Tab1 from './Tab1';
@@ -110,17 +110,22 @@ function List(props) {
   // }
 
 
-  const [ countNumber, setCountNumber ] = useState(1);
-  const [ isMax, setIsMax ] = useState(false);
+  // const [ countNumber, setCountNumber ] = useState(1);
+  // const [ isMax, setIsMax ] = useState(false);
   const [ tabActive, setTabActive ] = useState(1);
+  const [ formValue, setFormValue ] = useState({});
+  const inputElement = useRef(null);
 
   useEffect(() => {
     console.log('First time...');
+    inputElement.current.focus();
+    console.log('offsetWidth: ', inputElement.current.offsetWidth);
+    console.log('offsetHeight: ', inputElement.current.offsetHeight);
   }, []);
 
-  useEffect(() => {
-    console.log('is Max: ', isMax);
-  }, [isMax]);
+  // useEffect(() => {
+  //   console.log('is Max: ', isMax);
+  // }, [isMax]);
 
 
   return (
@@ -170,9 +175,11 @@ function List(props) {
       >
         Tab 2
       </button>
-      { tabActive === 1 ? <Tab1 /> : <Tab2 /> }
-      
-      <div
+      { tabActive === 1
+        ? <Tab1 inputElement={inputElement} formValue={formValue} setFormValue={setFormValue} /> 
+        : <SignUp setFormValue={setFormValue} /> 
+      }
+      {/* <div
         className="btn btn-primary"
         onClick={() => {
           if (countNumber >= 10) {
@@ -196,7 +203,7 @@ function List(props) {
         -
       </div>
 
-      <div>{ countNumber }</div>
+      <div>{ countNumber }</div> */}
     </div>
   );
 }
