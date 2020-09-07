@@ -1,14 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import Main from './Main';
+import TodoList from './TodoList';
+
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.css';
-import Main from './Main';
 
 ReactDOM.render(
   <React.StrictMode>
     <Main />
+    <TodoList />
   </React.StrictMode>,
   document.getElementById('root')
 );

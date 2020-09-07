@@ -6,14 +6,12 @@
 }
 
 .container-title {
+  padding: 8px 16px;
   height: 180px;
+  font-size: 20px;
   background-image: url('https://i.pinimg.com/564x/65/3a/71/653a717146fb47b666283dc49450cfdc.jpg');
-  /* background-image: url('https://i.pinimg.com/474x/5c/78/69/5c7869d3bf07572af856bdd030f3496b.jpg'); */
   background-size: cover;
   background-position: center 40%;
-}
-
-.time {
   color: #FFF;
 }
 
@@ -21,7 +19,34 @@
   height: calc(600px - 244px);
 }
 
-.add-input {
+.todo-item {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 12px;
+  margin: 12px;
+  border-radius: 20px;
+  box-shadow: 0 0 10px #DDD;
+  background-color: #FFF;
+}
+
+.icon:hover {
+  cursor: pointer;
+}
+
+.icon-check {
+  margin-right: 8px;
+}
+
+.content {
+  flex-grow: 1;
+}
+
+.icon-edit {
+  margin-right: 8px;
+}
+
+.add-task {
   display: flex;
   margin: 0 12px;
 }
