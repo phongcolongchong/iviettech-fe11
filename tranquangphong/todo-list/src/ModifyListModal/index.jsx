@@ -15,14 +15,26 @@ function ModifyListModal({
         <Modal.Title>{`${modalData.type === 'create' ? 'Add' : 'Edit'} task`}</Modal.Title>
       </Modal.Header>
       <Formik
-        initialValues={{ title: modalData.type === 'create' ? '' : modalData.title }}
+        initialValues={modalData.type === 'create'
+          ? {
+            title: '',
+            description: ''
+          }
+          : {
+            title: modalData.title,
+            description: modalData.description
+          }
+        }
         validationSchema={Yup.object({
           title: Yup.string()
             .required('Please input your task')
             .max(50, 'Must be 50 characters or less'),
+            description: Yup.string()
+            .required('Please input your description')
+            .max(200, 'Must be 200 characters or less'),
         })}
         enableReinitialize
-        onSubmit = {(values) => handleSubmitForm(values, modalData.type, modalData.index)}
+        onSubmit = {(values) => handleSubmitForm(values, modalData.type, modalData.id)}
       >
         <Form>
           <Modal.Body>
@@ -36,6 +48,16 @@ function ModifyListModal({
               />
               <div className="text-danger">
                 <ErrorMessage name="title" />
+              </div>
+              <label htmlFor="title">Description</label>
+              <Field 
+                className="form-control"
+                as="textarea" 
+                name="description"
+                placeholder="Input your description" 
+              />
+              <div className="text-danger">
+                <ErrorMessage name="description" />
               </div>
             </FormBootstrap.Group>
           </Modal.Body>

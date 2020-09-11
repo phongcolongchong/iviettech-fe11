@@ -4,6 +4,12 @@
   min-height: 100vh;
 }
 
+.todo-list-description {
+  margin-top: 8px;
+  padding: 8px 16px;
+  background-color: #EEE;
+}
+
 .todo-list-content {
   margin: 40px 0;
   width: 900px;
